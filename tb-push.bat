@@ -2,6 +2,19 @@
 
 for /f "delims=" %%i in ('git branch --show-current') do set branch_name=%%i
 
+@REM ============================================================================================
+@REM remove '-staging'/'-dev' from branch name to make sure we are on the master feature branch
+@REM ============================================================================================
+@REM Check if the string ends with -staging
+if "%branch_name:~-8%"=="-staging" (
+    set branch_name=%branch_name:~0,-8%
+)
+
+@REM Check if the string ends with -dev
+if "%branch_name:~-4%"=="-dev" (
+    set branch_name=%branch_name:~0,-4%
+)
+
 @REM ====================================
 echo 'info: updating local master...'
 @REM ====================================
