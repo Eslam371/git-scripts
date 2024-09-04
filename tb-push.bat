@@ -3,130 +3,130 @@
 for /f "delims=" %%i in ('git branch --show-current') do set branch_name=%%i
 
 @REM ====================================
-echo "info: updating local master..."
+echo 'info: updating local master...'
 @REM ====================================
-git checkout master
-git pull origin master
+git checkout master > NUL 2>&1
+git pull origin master > NUL 2>&1
 if %errorlevel% neq 0 (
     echo.
-    echo "error: solve merge conflicts between master and origin/master"
-    git merge --abort
-    git reset --merge
+    echo 'error: solve merge conflicts between master and origin/master'
+    git merge --abort > NUL 2>&1
+    git reset --merge > NUL 2>&1
     exit /b 1
 )
 
 @REM ====================================
-echo "info: syncing %branch_name% with master..."
+echo 'info: syncing %branch_name% with master...'
 @REM ====================================
-git checkout %branch_name%
-git merge master --no-edit
+git checkout %branch_name% > NUL 2>&1
+git merge master --no-edit > NUL 2>&1
 if %errorlevel% neq 0 (
     echo.
-    echo "error: solve merge conflicts between %branch_name% and origin/master"
-    git merge --abort
-    git reset --merge
+    echo 'error: solve merge conflicts between %branch_name% and origin/master'
+    git merge --abort > NUL 2>&1
+    git reset --merge > NUL 2>&1
     exit /b 1
 )
 
 @REM ====================================
-echo "info: pushing %branch_name%..."
+echo 'info: pushing %branch_name%...'
 @REM ====================================
-git push -u origin %branch_name%
+git push -u origin %branch_name% > NUL 2>&1
 
 
 @REM ====================================
-echo "info: bringing changes into staging branch..."
+echo 'info: bringing changes into staging branch...'
 @REM ====================================
-git branch %branch_name%-staging
-git checkout %branch_name%-staging
-git merge %branch_name% --no-edit
+git branch %branch_name%-staging > NUL 2>&1
+git checkout %branch_name%-staging > NUL 2>&1
+git merge %branch_name% --no-edit > NUL 2>&1
 if %errorlevel% neq 0 (
     echo.
-    echo "error: solve merge conflicts between %branch_name%-staging and %branch_name%"
-    git merge --abort
-    git reset --merge
+    echo 'error: solve merge conflicts between %branch_name%-staging and %branch_name%'
+    git merge --abort > NUL 2>&1
+    git reset --merge > NUL 2>&1
     exit /b 1
 )
 
 @REM ====================================
-echo "info: updating local staging..."
+echo 'info: updating local staging...'
 @REM ====================================
-git checkout staging
-git pull --no-edit origin staging
+git checkout staging > NUL 2>&1
+git pull --no-edit origin staging > NUL 2>&1
 if %errorlevel% neq 0 (
     echo.
-    echo "error: solve merge conflicts between staging and origin/staging"
-    git merge --abort
-    git reset --merge
+    echo 'error: solve merge conflicts between staging and origin/staging'
+    git merge --abort > NUL 2>&1
+    git reset --merge > NUL 2>&1
     exit /b 1
 )
 
 
 @REM ====================================
-echo "info: syncing %branch_name%-staging with staging..."
+echo 'info: syncing %branch_name%-staging with staging...'
 @REM ====================================
-git checkout %branch_name%-staging
-git merge staging --no-edit
+git checkout %branch_name%-staging > NUL 2>&1
+git merge staging --no-edit > NUL 2>&1
 if %errorlevel% neq 0 (
     echo.
-    echo "error: solve merge conflicts between %branch_name%-staging and staging"
-    git merge --abort
-    git reset --merge
+    echo 'error: solve merge conflicts between %branch_name%-staging and staging'
+    git merge --abort > NUL 2>&1
+    git reset --merge > NUL 2>&1
     exit /b 1
 )
 
 @REM ====================================
-echo "info: pushing %branch_name%-staging..."
+echo 'info: pushing %branch_name%-staging...'
 @REM ====================================
-git push -u origin %branch_name%-staging
+git push -u origin %branch_name%-staging > NUL 2>&1
 
 
 @REM ====================================
-echo "info: bringing changes into dev branch..."
+echo 'info: bringing changes into dev branch...'
 @REM ====================================
-git checkout %branch_name%
-git branch %branch_name%-dev
-git checkout %branch_name%-dev
-git merge %branch_name% --no-edit
+git checkout %branch_name% > NUL 2>&1
+git branch %branch_name%-dev > NUL 2>&1
+git checkout %branch_name%-dev > NUL 2>&1
+git merge %branch_name% --no-edit > NUL 2>&1
 if %errorlevel% neq 0 (
     echo.
-    echo "solve merge conflicts between %branch_name%-dev and %branch_name%"
-    git merge --abort
-    git reset --merge
+    echo 'solve merge conflicts between %branch_name%-dev and %branch_name%'
+    git merge --abort > NUL 2>&1
+    git reset --merge > NUL 2>&1
     exit /b 1
 )
 
 @REM ====================================
 echo "info: updating local develop..."
 @REM ====================================
-git checkout develop
-git pull --no-edit origin develop
+git checkout develop > NUL 2>&1
+git pull --no-edit origin develop > NUL 2>&1
 if %errorlevel% neq 0 (
     echo.
-    echo "error: solve merge conflicts between origin/develop and develop"
-    git merge --abort
-    git reset --merge
+    echo 'error: solve merge conflicts between origin/develop and develop'
+    git merge --abort > NUL 2>&1
+    git reset --merge > NUL 2>&1
     exit /b 1
 )
 
 @REM ====================================
-echo "info: syncing %branch_name%-dev with develop..."
+echo 'info: syncing %branch_name%-dev with develop...'
 @REM ====================================
-git checkout %branch_name%-dev
-git merge develop --no-edit
+git checkout %branch_name%-dev > NUL 2>&1
+git merge develop --no-edit > NUL 2>&1
 if %errorlevel% neq 0 (
     echo.
-    echo "error: solve merge conflicts between %branch_name%-dev and develop"
-    git merge --abort
-    git reset --merge
+    echo 'error: solve merge conflicts between %branch_name%-dev and develop'
+    git merge --abort > NUL 2>&1
+    git reset --merge > NUL 2>&1
     exit /b 1
 )
 
 @REM ====================================
-echo "info: pushing %branch_name% develop..."
+echo 'info: pushing %branch_name%-dev...'
 @REM ====================================
-git push -u origin %branch_name%-dev
+git push -u origin %branch_name%-dev > NUL 2>&1
 
-git checkout %branch_name%
+git checkout %branch_name% > NUL 2>&1
 
-echo ".======== DONE ========."
+echo '.======== DONE ========.'
