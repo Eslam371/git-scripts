@@ -1,7 +1,9 @@
-git fetch origin
+@echo off
 
-git checkout master
+git fetch origin > NUL 2> tb-push.log
 
-git pull
+git checkout master > NUL 2> tb-push.log
 
-git checkout -b %1 origin/master
+git pull > NUL 2> tb-push.log
+
+git checkout -b %1 origin/master > NUL 2> tb-push.log
