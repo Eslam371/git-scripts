@@ -8,6 +8,17 @@ if %errorlevel% neq 0 (
 )
 
 for /f "delims=" %%i in ('git branch --show-current') do set branch_name=%%i
+if "%branch_name%"=="master" (
+    echo error: invalid branch, you are on master.
+    exit /b 1
+) else if "%branch_name%"=="staging" (
+    echo error: invalid branch, you are on staging.
+    exit /b 1
+) else if "%branch_name%"=="develop" (
+    echo error: invalid branch, you are on develop.
+    exit /b 1
+)
+
 
 @REM ============================================================================================
 @REM remove '-staging'/'-dev' from branch name to make sure we are on the master feature branch
