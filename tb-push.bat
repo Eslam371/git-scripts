@@ -2,7 +2,6 @@
 
 ping github.com -n 1 > NUL 2> tb-push.log
 if %errorlevel% neq 0 (
-    echo.
     echo error: unable to connect to github
     exit /b 1
 )
@@ -39,7 +38,6 @@ echo info: updating local master...
 git checkout master > NUL 2>tb-push.log
 git pull origin master > NUL 2>tb-push.log
 if %errorlevel% neq 0 (
-    echo.
     echo error: solve merge conflicts between master and origin/master
     git merge --abort > NUL 2> tb-push.log
     git reset --merge > NUL 2> tb-push.log
@@ -51,9 +49,9 @@ echo info: syncing %branch_name% with master...
 @REM ====================================
 git checkout %branch_name% > NUL 2> tb-push.log
 git merge master --no-edit > NUL 2> tb-push.log
+echo hi %errorlevel%
 if %errorlevel% neq 0 (
-    echo.
-    echo error: solve merge conflicts between %branch_name% and origin/master
+    echo error: solve merge conflicts between origin/master and %branch_name%
     git merge --abort > NUL 2> tb-push.log
     git reset --merge > NUL 2> tb-push.log
     exit /b 1
@@ -72,7 +70,6 @@ git branch %branch_name%-staging > NUL 2> tb-push.log
 git checkout %branch_name%-staging > NUL 2> tb-push.log
 git merge %branch_name% --no-edit > NUL 2> tb-push.log
 if %errorlevel% neq 0 (
-    echo.
     echo error: solve merge conflicts between %branch_name%-staging and %branch_name%
     git merge --abort > NUL 2> tb-push.log
     git reset --merge > NUL 2> tb-push.log
@@ -85,7 +82,6 @@ echo info: updating local staging...
 git checkout staging > NUL 2> tb-push.log
 git pull --no-edit origin staging > NUL 2> tb-push.log
 if %errorlevel% neq 0 (
-    echo.
     echo error: solve merge conflicts between staging and origin/staging
     git merge --abort > NUL 2> tb-push.log
     git reset --merge > NUL 2> tb-push.log
@@ -99,7 +95,6 @@ echo info: syncing %branch_name%-staging with staging...
 git checkout %branch_name%-staging > NUL 2> tb-push.log
 git merge staging --no-edit > NUL 2> tb-push.log
 if %errorlevel% neq 0 (
-    echo.
     echo error: solve merge conflicts between %branch_name%-staging and staging
     git merge --abort > NUL 2> tb-push.log
     git reset --merge > NUL 2> tb-push.log
@@ -120,7 +115,6 @@ git branch %branch_name%-dev > NUL 2> tb-push.log
 git checkout %branch_name%-dev > NUL 2> tb-push.log
 git merge %branch_name% --no-edit > NUL 2> tb-push.log
 if %errorlevel% neq 0 (
-    echo.
     echo solve merge conflicts between %branch_name%-dev and %branch_name%
     git merge --abort > NUL 2> tb-push.log
     git reset --merge > NUL 2> tb-push.log
@@ -133,7 +127,6 @@ echo info: updating local develop...
 git checkout develop > NUL 2> tb-push.log
 git pull --no-edit origin develop > NUL 2> tb-push.log
 if %errorlevel% neq 0 (
-    echo.
     echo error: solve merge conflicts between origin/develop and develop
     git merge --abort > NUL 2> tb-push.log
     git reset --merge > NUL 2> tb-push.log
@@ -146,7 +139,6 @@ echo info: syncing %branch_name%-dev with develop...
 git checkout %branch_name%-dev > NUL 2> tb-push.log
 git merge develop --no-edit > NUL 2> tb-push.log
 if %errorlevel% neq 0 (
-    echo.
     echo error: solve merge conflicts between %branch_name%-dev and develop
     git merge --abort > NUL 2> tb-push.log
     git reset --merge > NUL 2> tb-push.log
