@@ -49,7 +49,6 @@ echo info: syncing %branch_name% with master...
 @REM ====================================
 git checkout %branch_name% > NUL 2> tb-push.log
 git merge master --no-edit > NUL 2> tb-push.log
-echo hi %errorlevel%
 if %errorlevel% neq 0 (
     echo error: solve merge conflicts between origin/master and %branch_name%
     git merge --abort > NUL 2> tb-push.log
