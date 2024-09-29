@@ -151,4 +151,4 @@ git push -u origin %branch_name%-dev > NUL 2> tb-push.log
 
 git checkout %branch_name% > NUL 2> tb-push.log
 
-echo .================ DONE ================.
+echo info: done.
